@@ -33,7 +33,7 @@ import Adafruit_DHT
 # Type of sensor, can be Adafruit_DHT.DHT11, Adafruit_DHT.DHT22, or Adafruit_DHT.AM2302.
 DHT_TYPE = Adafruit_DHT.DHT22
 
-# Example of sensor connected to Raspberry Pi pin 23
+# Example of sensor connected to Raspberry Pi
 DHT_PIN  = 4 
 
 # How long to wait (in seconds) between measurements.
