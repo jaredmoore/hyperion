@@ -6,7 +6,7 @@
   <style> /* set the CSS */
     body { font: 12px Arial;}
     path {
-      stroke-width: 2;
+      stroke-width: 3;
       fill: none;
     }
     .axis path, .axis line {
@@ -41,12 +41,9 @@
 
 {% block body %}
 <div id='graphDiv'></div>
-{% endblock %}
-
-{% block scripts %}
   <script type="text/javascript" src="{{ url_for('static', filename='line_chart.js') }}"></script>
   <script> 
     draw(graphData);
   </script>
-  {{super()}}
 {% endblock %}
+

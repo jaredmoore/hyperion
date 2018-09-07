@@ -99,16 +99,15 @@
       svg.append("path")
 	.style("stroke", "red")
 	.attr("d", moldWarnLine(data));
-      // Add a vertical line at August 28, 2018 at 1:00 PM for when
-      // the dehumidifier was added.
-      svg.append("line")
-	    .attr("x1", x(d3.time.hour.offset(parseDate("2018-08-28 13:00:00"), 4)))  //<<== change your code here
-	    .attr("y1", 0)
-	    .attr("x2", x(d3.time.hour.offset(parseDate("2018-08-28 13:00:00"), 4)))  //<<== and here
-	    .attr("y2", svgHeight - margin.top - margin.bottom)
-	    .style("stroke-width", 2)
-	    .style("stroke", "gray")
-	    .style("fill", "none");
-    };
 
-//draw(graphData);
+	// Add a vertical line at August 28, 2018 at 1:00 PM for when
+	// the dehumidifier was added.
+	svg.append("line")
+		.attr("x1", x(d3.time.hour.offset(parseDate("2018-08-28 13:00:00"), 4)))  //<<== change your code here
+		.attr("y1", 0)
+		.attr("x2", x(d3.time.hour.offset(parseDate("2018-08-28 13:00:00"), 4)))  //<<== and here
+		.attr("y2", svgHeight - margin.top - margin.bottom)
+		.style("stroke-width", 2)
+		.style("stroke", "gray")
+		.style("fill", "none");
+    };
