@@ -26,7 +26,8 @@
   <script> 
     // data for the temperature and humidity
     var graphData = {{ data.chart_data | safe }};
-  </script>
+    var lastData = {{ data.last_data | safe }};
+</script>
 {% endblock %}
 
 {% block metas %}
@@ -40,10 +41,23 @@
 {% endblock %}
 
 {% block body %}
-<div id='graphDiv'></div>
+<div id='lastData'>
+	<h4>Current Conditions:</h4>
+	<span>Time: </span><span id='cur_time'></span></br>
+	<span>Temp: </span><span id='cur_temp'></span></br>
+	<span>Humidity: </span><span id='cur_humidity'></span></br>
+</div>
+<div id='graphDiv'>
+	<h4>Historical Data:</h4>
+</div>
   <script type="text/javascript" src="{{ url_for('static', filename='line_chart.js') }}"></script>
   <script> 
     draw(graphData);
+
+    // Add data for current status
+    document.getElementById('cur_time').innerHTML = lastData.time
+    document.getElementById('cur_temp').innerHTML = lastData.temp.toFixed(2)
+    document.getElementById('cur_humidity').innerHTML = lastData.humidity.toFixed(2)
   </script>
 {% endblock %}
 

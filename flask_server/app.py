@@ -7,25 +7,26 @@ from flask_bootstrap import Bootstrap
 
 import pandas as pd
 
-temp_humidity_df = ""
+temp_humidity_df = "" # Keep track of historical data.
+last_temp_humidity = "" # Keep track of the last data value recorded.
 
 def update_temp_humidity():
     # Run this function periodically and keep data persistent.
-    global temp_humidity_df
+    global temp_humidity_df, last_temp_humidity
     
     temp_humidity_df = pd.read_csv('/home/pi/logs/temp_humidity.csv')
    
     temp_humidity_df.time = pd.to_datetime(temp_humidity_df.time)
 
-def get_temp_humidity():
-    global temp_humidity_df
-    
-    #chart_data = temp_humidity_df.to_dict(orient='records')
-    #chart_data = json.dumps(chart_data, indent=2, default=str)
+    # Get the most recent temp and humidity
+    last_temp_humidity = temp_humidity_df.iloc[temp_humidity_df['time'].idxmax()]
 
+def get_temp_humidity():
+    global temp_humidity_df, last_temp_humidity
+    
     chart_data = temp_humidity_df.to_json(orient='records',date_format='iso')
 
-    data = {'chart_data': chart_data}
+    data = {'chart_data': chart_data, 'last_data': last_temp_humidity.to_json(date_format='iso')}
     return data
 
 sched = BackgroundScheduler(daemon=True)
